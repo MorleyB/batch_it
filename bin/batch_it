@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/batch_it"
+
+begin
+  BatchIt::Application.new(ARGV).run
+rescue Errno::ENOENT => err
+  abort "batch_it: #{err.message}"
+rescue OptionParser::InvalidOption => err
+  abort "batch_it: #{err.message}"
+end
