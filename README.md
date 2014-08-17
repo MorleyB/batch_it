@@ -12,4 +12,11 @@ RVM
 
 
 run file
-  ./bin/rcat
+  ./bin/batch_it
+
+executable
+  chmod +x bin/batch_it
+
+
+./bin/batch_it --h
+./bin/batch_it --help
