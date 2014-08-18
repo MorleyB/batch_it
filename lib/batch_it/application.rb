@@ -13,16 +13,15 @@ module BatchIt
       @file_manager.setup_output_directory(@output_path)
       all_destinations = []
 
-      @destinations.each do |destination|
-        @html_builder.add_sample_html_to_output_directory
-
+      @destinations.xpath('//destination').each do |destination|
+        @file_manager.add_sample_html_to_output_directory(@output_path)
         html_file = @html_builder.copy_html_file(@output_path)
         destination_name = @html_builder.extract_destination_name(destination)
         all_destinations << destination_name
 
         @html_builder.set_title_h1(html_file, destination_name)
         @html_builder.update_secondary_navigation(html_file, destination_name)
-        @html_builder.add_taxonomy_navigation(html_file, @taxonomy)
+        @html_builder.add_taxonomy_navigation(html_file, @taxonomy, @output_path)
         @html_builder.add_destination_body_text(html_file, destination)
 
         @file_manager.write_to_file(@output_path, html_file)
@@ -33,8 +32,8 @@ module BatchIt
     end
 
     def report_progress(all_destinations)
-      destinations = all_destinations.join(", ")
-      puts "BatchIt complete! Generated HTML files for:(#{destinations}) can be found in the #{@output_path} Directory."
+      destinations = all_destinations.join(",\n")
+      puts "BatchIt complete! \n Generated HTML files for: \n #{destinations}\n HTML files can be found in the #{@output_path} directory."
     end
 
     def parse_options(argv)
@@ -68,6 +67,7 @@ module BatchIt
         puts "#{ex.message()}. Please use -h or --h for usage instructions."
         exit(1)
       end
+      [@destinations, @taxonomy, @output_path]
     end
 
   end
