@@ -31,7 +31,7 @@
   * This program is using bundler to install gems. To install gems from the project directory, using the command line:
 
     ```
-    $ bundle
+    $ bundle install
     ```
 
     If bundler is not installed, follow the first Getting Started example, ([http://bundler.io/]).
