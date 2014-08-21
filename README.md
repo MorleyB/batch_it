@@ -38,7 +38,7 @@
 
 
 
-### Run Applications
+### Run Application
 ============
   ## From the project directory:
   ```
